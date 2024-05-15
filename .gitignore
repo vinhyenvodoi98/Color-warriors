@@ -4,6 +4,7 @@
 
 /node_modules
 /develop_frontend
+/packages/onchainkit
 # misc
 
 .DS_Store

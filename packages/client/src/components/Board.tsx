@@ -48,7 +48,7 @@ const Broad: React.ForwardRefRenderFunction<HTMLDivElement, Props> = (
 
   return (
     <div ref={ref} className='flex items-center bg-base-200 flex-col p-4 rounded-lg'>
-      <div className={`flex flex-wrap w-[${ gridRows * cellSize + 4}px] border-2 border-black`}>{generateGridCells()}</div>
+      <div className={`flex flex-wrap w-[324px] border-2 border-black`}>{generateGridCells()}</div>
     </div>
   );
 };
