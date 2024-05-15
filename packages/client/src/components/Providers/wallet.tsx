@@ -114,7 +114,7 @@ const Wallet = () => {
                       <button
                         onClick={toggleDropdown}
                         type="button"
-                        className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-xl shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-xl shadow-sm text-sm font-medium"
                         id="dropdown-menu-button"
                         aria-expanded={isOpen ? 'true' : 'false'}
                         aria-haspopup="true"
@@ -136,16 +136,16 @@ const Wallet = () => {
                       </button>
                       {isOpen && (
                         <div
-                          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+                          className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 border border-gray-300"
                           role="menu"
                           aria-orientation="vertical"
                           aria-labelledby="dropdown-menu-button"
                           tabIndex={"-1" as any}
                         >
-                          <Link href={`/profile/${account.address}`} className='flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
+                          <Link href={`/profile/${account.address}`} className='flex px-4 py-2 text-sm'>
                             <p className='ml-4'>Profile</p>
                           </Link>
-                          <div className='flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900' onClick={openAccountModal}>
+                          <div className='flex px-4 py-2 text-sm' onClick={openAccountModal}>
                             <p className='ml-4'>Disconnect</p>
                           </div>
                         </div>

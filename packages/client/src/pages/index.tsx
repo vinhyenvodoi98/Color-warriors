@@ -4,6 +4,7 @@ import { useAccount } from 'wagmi';
 import Layout from '@/components/layout/Layout';
 
 import { toast } from "react-toastify";
+import PageBoard from '@/components/PageBoard';
 
 export default function HomePage() {
   const { address } = useAccount();
@@ -22,8 +23,7 @@ export default function HomePage() {
 
   return (
     <Layout>
-      <div>{address}</div>
-      <button onClick={() => addNotification()}>Notification</button>
+      <PageBoard />
     </Layout>
   );
 }

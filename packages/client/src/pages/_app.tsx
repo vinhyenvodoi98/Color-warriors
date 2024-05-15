@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <Providers data-theme="cupcake">
+    <Providers data-theme="dark">
       <Header />
         <Component {...pageProps} />
       <ToastContainer position="bottom-right" newestOnTop />
