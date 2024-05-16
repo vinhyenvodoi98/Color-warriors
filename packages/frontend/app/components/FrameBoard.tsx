@@ -10,7 +10,7 @@ export default function FrameBoard({board}: {board:string[][]}) {
         gridCells.push(
           <div
             key={`${row}-${col}`}
-            tw={`bg-white h-10 w-10 bg-[${cellColor}]`}
+            tw={`bg-white h-20 w-20 bg-[${cellColor}]`}
           ></div>
         );
       }
@@ -21,7 +21,7 @@ export default function FrameBoard({board}: {board:string[][]}) {
 
   return (
     <div tw='flex items-center flex-col'>
-      <div tw='flex flex-wrap w-[400px]'>{generateGridCells()}</div>
+      <div tw='flex flex-wrap w-[800px]'>{generateGridCells()}</div>
     </div>
   );
 }
