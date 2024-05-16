@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { Button, createFrames } from "frames.js/next";
 import FrameBoard from "../components/FrameBoard";
-import { baseSepolia } from "viem/chains";
+import { zkSyncSepoliaTestnet } from "viem/chains";
 import contractAddress from '../../../smart-contract/contract-address.json'
 import contractAbi from '../../../smart-contract/artifacts-zk/contracts/Board.sol/Board.json'
 import {
@@ -15,7 +15,7 @@ const frames = createFrames({
 
 const handleRequest = frames(async (ctx:any) => {
   const publicClient = createPublicClient({
-    chain: baseSepolia,
+    chain: zkSyncSepoliaTestnet,
     transport: http(),
   });
   const board = await publicClient.readContract({
