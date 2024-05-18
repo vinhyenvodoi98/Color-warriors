@@ -38,7 +38,7 @@ export async function POST(
     if (parts.length !== 2) {
       throw new Error("Wrong format");
     }
-    if(Number(x) > 19 || Number(y) > 19){
+    if(Number(x) > 9 || Number(y) > 9){
       throw new Error("Out of range");
     }
     [x, y] = parts

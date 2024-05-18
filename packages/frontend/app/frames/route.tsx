@@ -29,7 +29,7 @@ const handleRequest = frames(async (ctx:any) => {
     version: "vNext",
     image: (
       <div tw="w-full h-full bg-slate-200 text-white justify-center items-center flex flex-col">
-        <p tw="text-slate-900 text-center">Please enter [0-10] [0-10] into the input and select the color</p>
+        <p tw="text-slate-900 text-center">Please enter [0-9] [0-9] into the input and select the color</p>
         <p tw="text-slate-900 text-center">The game will last 7 minutes. the fewest number of colors wins</p>
         <FrameBoard board={board}/>
       </div>
