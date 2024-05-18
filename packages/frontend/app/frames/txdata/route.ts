@@ -49,7 +49,7 @@ export async function POST(
   const calldata = encodeFunctionData({
     abi: contractAbi.abi,
     functionName: "place",
-    args: [{x,y,color}],
+    args: [req.nextUrl.searchParams.get("id"), {x,y,color}],
   });
 
   return NextResponse.json({

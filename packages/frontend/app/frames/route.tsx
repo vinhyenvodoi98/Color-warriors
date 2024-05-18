@@ -38,9 +38,9 @@ const handleRequest = frames(async (ctx:any) => {
       aspectRatio: "1:1",
     },
     buttons: [
-      <Button action="tx" target="/txdata">🟥</Button>,
-      <Button action="tx" target="/txdata">🟦</Button>,
-      <Button action="tx" target="/txdata">🟨</Button>,
+      <Button action="tx" target={`/txdata?id=${ctx.searchParams.id}`}>🟥</Button>,
+      <Button action="tx" target={`/txdata?id=${ctx.searchParams.id}`}>🟦</Button>,
+      <Button action="tx" target={`/txdata?id=${ctx.searchParams.id}`}>🟨</Button>,
       <Button action="post">Refresh</Button>
     ],
     textInput: "Put Coordinates example : 5-5",
