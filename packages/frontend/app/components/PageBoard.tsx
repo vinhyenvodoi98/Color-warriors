@@ -89,8 +89,7 @@ const Body = () => {
           colorOptions={colorOptions}
           coordinates={coordinates}
           setSelectedColor={setSelectedColor}
-          // placePixel={write}
-          placePixel={()=>console.log("test")}
+          placePixel={write}
           selectedColor={selectedColor}
         /> :
         <div>

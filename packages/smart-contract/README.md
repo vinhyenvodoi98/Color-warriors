@@ -49,3 +49,15 @@ Important: zkSync In-memory Node currently supports only the L2 node. If contrac
 ## License
 
 This project is under the [MIT](./LICENSE) license.
+
+## Report deploy
+
+Starting deployment process of "BoardGame"...
+Estimated deployment cost: 0.10145925624942788 ETH
+
+"BoardGame" was successfully deployed:
+ - Contract address: 0x34B2Fe294a904791C811c72021F0083449d8c869
+ - Contract source: contracts/BoardGame.sol:BoardGame
+ - Encoded constructor arguments: 0x
+
+Requesting contract verification...
