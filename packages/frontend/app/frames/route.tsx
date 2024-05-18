@@ -29,8 +29,8 @@ const handleRequest = frames(async (ctx:any) => {
     version: "vNext",
     image: (
       <div tw="w-full h-full bg-slate-200 text-white justify-center items-center flex flex-col">
-        <p tw="text-slate-900 text-center">This is a 10x10 table</p>
         <p tw="text-slate-900 text-center">Please enter [0-10] [0-10] into the input and select the color</p>
+        <p tw="text-slate-900 text-center">The game will last 7 minutes. the fewest number of colors wins</p>
         <FrameBoard board={board}/>
       </div>
     ),
@@ -43,7 +43,7 @@ const handleRequest = frames(async (ctx:any) => {
       <Button action="tx" target="/txdata">🟨</Button>,
       <Button action="post">Refresh</Button>
     ],
-    textInput: "Put Coordinates example : 15-15",
+    textInput: "Put Coordinates example : 5-5",
   };
 });
 
