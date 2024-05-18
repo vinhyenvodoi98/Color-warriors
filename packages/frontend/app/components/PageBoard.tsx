@@ -2,8 +2,6 @@
 import Board from './Board';
 import { useMemo, useRef, useState, useEffect } from "react";
 import Palette from './Palette';
-import Header from './Header';
-import Providers from './Provider';
 import { useReadContract, useAccount, useWriteContract } from 'wagmi';
 
 import contractAddress from '../../../smart-contract/contract-address.json'
@@ -11,16 +9,7 @@ import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGam
 import { colorOptions } from '../config/color';
 import Wallet from './Wallet';
 
-export default function PageBoard() {
-  return(
-    <Providers>
-      <Header />
-      <Body/>
-    </Providers>
-  )
-}
-
-const Body = () => {
+export default function PageBoard({gameId}: {gameId:number}) {
   const [selectedColor, setSelectedColor]=useState<string>(colorOptions.red)
   const { writeContract } = useWriteContract()
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -33,7 +22,7 @@ const Body = () => {
     address: contractAddress["300"].address as `0x${string}`,
     abi: contractAbi.abi as any,
     functionName: 'getBoard',
-    args: [],
+    args: [gameId],
   });
 
   useEffect(() => {
@@ -78,7 +67,7 @@ const Body = () => {
               address: contractAddress["300"].address as `0x${string}`,
               abi: contractAbi.abi,
               functionName: 'place',
-              args: [{
+              args: [gameId,{
                 x: coordinates.x, //x
                 y: coordinates.y, //y
                 color: selectedColor  //color

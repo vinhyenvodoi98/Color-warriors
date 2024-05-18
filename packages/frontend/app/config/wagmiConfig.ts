@@ -1,9 +1,9 @@
 'use client';
-import { zkSync, zkSyncSepoliaTestnet } from 'wagmi/chains'
+import { zkSyncSepoliaTestnet } from 'wagmi/chains'
 import { http, createStorage, cookieStorage } from 'wagmi';
 import { Chain, getDefaultConfig } from '@rainbow-me/rainbowkit';
 const chains: Chain[] = [
-  zkSync,
+  // zkSync,
   zkSyncSepoliaTestnet
 ]
 
@@ -19,27 +19,3 @@ export const config = getDefaultConfig({
   }),
 transports: chains.reduce((obj, chain) => ({ ...obj, [chain.id]: http() }), {})
 });
-
-// export const defaultChain = process.env.NODE_ENV === "development" ? zkSyncSepoliaTestnet : zkSync;
-
-// const { publicClient } = configureChains(
-//   chains,
-//   [
-//     publicProvider()
-//   ]
-// );
-
-// const { connectors } = getDefaultWallets({
-//   appName: 'Color warriors',
-//   chains,
-//   projectId: `${process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID}`,
-// });
-
-// export const wagmiConfig = createConfig({
-//   autoConnect: true,
-//   ssr: true,
-//   connectors,
-//   publicClient,
-// });
-
-// export { chains };

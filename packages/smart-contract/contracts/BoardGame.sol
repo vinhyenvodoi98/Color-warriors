@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract BoardGame is Ownable {
     using Counters for Counters.Counter;
-    Counters.Counter private gameId;
+    Counters.Counter public gameId;
     mapping(uint256 => string[10][10]) public boards;
     mapping(uint256 => mapping(address => uint8[2])) public userLocation;
     mapping(uint256 => uint256) public startTime;

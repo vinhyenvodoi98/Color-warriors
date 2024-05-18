@@ -1,4 +1,4 @@
-import * as React from 'react';
+import Link from 'next/link';
 
 import Wallet from './Wallet';
 
@@ -8,7 +8,9 @@ export default function Header() {
       <div className='flex items-center justify-between'>
         <div className="navbar px-6">
           <div className="navbar-start">
-            <a className="btn btn-ghost text-xl">Home</a>
+          <Link href='/'>
+            <button className="btn btn-ghost text-xl">Home</button>
+          </Link>
           </div>
           <div className="navbar-end">
             <button className="btn btn-ghost btn-circle">
