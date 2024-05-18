@@ -39,7 +39,7 @@ export default function GamesPage() {
           <div className="grid grid-cols-3">
             { Number(gameId) === 0 ?
             <div className='border rounded-full p-2'>
-              <p className='font-bold text-neutral-content'>There's no game going on</p>
+              <p className='font-bold text-neutral-content'>There is no game going on</p>
             </div>
             :
             <Room currentGameId={Number(gameId)}/>

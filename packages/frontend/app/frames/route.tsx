@@ -22,6 +22,7 @@ const handleRequest = frames(async (ctx:any) => {
     address: contractAddress["300"].address as `0x${string}`,
     abi: contractAbi.abi,
     functionName: 'getBoard',
+    args: [ctx.searchParams.id]
   })  as string[][];
 
   return {

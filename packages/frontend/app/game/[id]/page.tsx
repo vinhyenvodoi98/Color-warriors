@@ -8,7 +8,9 @@ export default function Game() {
 
   return(
     <div>
-      <PageBoard gameId={params.id}/>
+      {params.id !== undefined &&
+        <PageBoard gameId={Number(params.id)}/>
+      }
     </div>
   )
 }
