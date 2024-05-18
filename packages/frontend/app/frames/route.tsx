@@ -3,7 +3,7 @@ import { Button, createFrames } from "frames.js/next";
 import FrameBoard from "../components/FrameBoard";
 import { zkSyncSepoliaTestnet } from "viem/chains";
 import contractAddress from '../../../smart-contract/contract-address.json'
-import contractAbi from '../../../smart-contract/artifacts-zk/contracts/Board.sol/Board.json'
+import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import {
   createPublicClient,
   http,

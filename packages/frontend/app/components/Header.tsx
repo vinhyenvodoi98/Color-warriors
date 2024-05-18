@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className='sticky top-0 z-50'>
       <div className='flex items-center justify-between'>
-        <div className="navbar mt-4 px-6">
+        <div className="navbar px-6">
           <div className="navbar-start">
             <a className="btn btn-ghost text-xl">Home</a>
           </div>

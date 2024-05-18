@@ -2,11 +2,12 @@ import PageBoard from "./components/PageBoard";
 import type { Metadata } from "next";
 import { fetchMetadata } from "frames.js/next";
 import { vercelURL } from "./utils";
+import Header from "./components/Header";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "FlamePixel",
-    description: "We have 1 days to place pixel then we can claim it as NFT",
+    title: "Color Warrior",
+    description: "Let's go to color battle",
     other: {
       ...(await fetchMetadata(
         new URL(
@@ -22,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   return (
     <div className="">
-      <PageBoard/>
+      {/* <PageBoard/> */}
     </div>
   );
 }

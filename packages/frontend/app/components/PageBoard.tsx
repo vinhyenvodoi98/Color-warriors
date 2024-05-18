@@ -4,10 +4,10 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import Palette from './Palette';
 import Header from './Header';
 import Providers from './Provider';
-import { useContractRead, usePrepareContractWrite, useAccount, useContractWrite } from 'wagmi';
+import { useReadContract, useAccount, useWriteContract } from 'wagmi';
 
 import contractAddress from '../../../smart-contract/contract-address.json'
-import contractAbi from '../../../smart-contract/artifacts-zk/contracts/Board.sol/Board.json'
+import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import { colorOptions } from '../config/color';
 import Wallet from './Wallet';
 
@@ -21,21 +21,19 @@ export default function PageBoard() {
 }
 
 const Body = () => {
-  const [selectedColor, setSelectedColor]=useState<string>("#FF0000")
+  const [selectedColor, setSelectedColor]=useState<string>(colorOptions.red)
+  const { writeContract } = useWriteContract()
   const canvasRef = useRef<HTMLDivElement>(null);
   const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
   });
   const { address } = useAccount()
-  const { data: grid, refetch } = useContractRead({
+  const { data: grid, refetch } = useReadContract({
     address: contractAddress["300"].address as `0x${string}`,
     abi: contractAbi.abi as any,
     functionName: 'getBoard',
     args: [],
-    chainId: 420, // only call from op-goerli
-    cacheTime: 10_000,
-    staleTime: 10_000,
   });
 
   useEffect(() => {
@@ -57,21 +55,8 @@ const Body = () => {
     return grid ?
       // @ts-ignore
       grid.map((obj:any) => obj?.map((value:string) => value === "" ? "white" : value))
-      : Array.from({ length: 20 }, () => new Array(20).fill('white'));
+      : Array.from({ length: 10 }, () => new Array(10).fill('white'));
   }, [grid]);
-
-  const { config } = usePrepareContractWrite({
-		address: contractAddress["300"].address as `0x${string}`,
-		abi: contractAbi.abi,
-		functionName: 'place',
-		args: [{
-      x: coordinates.x, //x
-      y: coordinates.y, //y
-      color: selectedColor  //color
-    }] as any,
-	})
-
-	const { write, isLoading, isSuccess } = useContractWrite(config)
 
   return (
     <div
@@ -89,7 +74,17 @@ const Body = () => {
           colorOptions={colorOptions}
           coordinates={coordinates}
           setSelectedColor={setSelectedColor}
-          placePixel={write}
+          placePixel={() => writeContract({
+              address: contractAddress["300"].address as `0x${string}`,
+              abi: contractAbi.abi,
+              functionName: 'place',
+              args: [{
+                x: coordinates.x, //x
+                y: coordinates.y, //y
+                color: selectedColor  //color
+              }] as any,
+            }
+          )}
           selectedColor={selectedColor}
         /> :
         <div>
