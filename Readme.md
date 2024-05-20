@@ -1,9 +1,8 @@
 # What it does
-This is a game where people will create color nfts starting from 3 basic colors: red, yellow, blue.
-
+This is a **Farcaster game** where people will create color nfts starting from 3 basic colors: red, yellow, blue.
 There will be 2 types of games one is for beginners who don't have any color yet and the other is for people with colors to challenge and take the opponent's color
 
-- For a game for beginners, everyone will choose the coordinates on the board. Once selected, no one else can choose that location again. Each person can choose multiple locations to place. After choosing the location, it will be time to choose the color. After the color selection time ends, the color with the largest number of positions will win. Those with the winning color will be able to claim an nft of that color
+- For a game for beginners, everyone will choose the coordinates on the board. Game is 7mins long and player can select location and color. Once selected, no one else can choose that location again. After game over, the color with the smallest number of positions will win. Those with the winning color will be able to claim an nft of that color
 
 - For a games for people who already have their colors, it will be like playing Go. As long as they win, the other player's color will be captured
 
