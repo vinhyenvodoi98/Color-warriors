@@ -1,6 +1,9 @@
 import { HardhatUserConfig } from "hardhat/config";
-
+import "@nomicfoundation/hardhat-toolbox";
 import "@matterlabs/hardhat-zksync";
+require('dotenv').config()
+
+const { WALLET_PRIVATE_KEY } = process.env;
 
 const config: HardhatUserConfig = {
   defaultNetwork: "zkSyncSepoliaTestnet",
@@ -17,6 +20,11 @@ const config: HardhatUserConfig = {
     //   zksync: true,
     //   verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
     // },
+    baseSepolia: {
+      url: "https://sepolia.base.org",
+      accounts: [WALLET_PRIVATE_KEY as string],
+      chainId: 84532,
+    },
     hardhat: {
       zksync: true,
     },
