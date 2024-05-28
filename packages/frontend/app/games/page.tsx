@@ -1,17 +1,18 @@
 'use client'
-import { useWriteContract, useReadContract, useBlockNumber } from 'wagmi';
+import { useWriteContract, useReadContract, useBlockNumber, useChainId } from 'wagmi';
 
-import contractAddress from '../../../smart-contract/contract-address.json'
 import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { getContractAddress } from '../utils/getContract';
 
 
 export default function GamesPage() {
   const { writeContract } = useWriteContract()
+  const chainId = useChainId()
 
   const { data: gameId, refetch } = useReadContract({
-    address: contractAddress["300"].address as `0x${string}`,
+    address: getContractAddress(chainId) as `0x${string}`,
     abi: contractAbi.abi as any,
     functionName: 'gameId',
     args: [],
@@ -42,13 +43,13 @@ export default function GamesPage() {
               <p className='font-bold text-neutral-content'>There is no game going on</p>
             </div>
             :
-            <Room currentGameId={Number(gameId)}/>
+            <Room currentGameId={Number(gameId)} chainId={chainId}/>
             }
           </div>
         </div>
         <div className="">
           <button onClick={() => writeContract({
-              address: contractAddress["300"].address as `0x${string}`,
+              address: getContractAddress(chainId) as `0x${string}`,
               abi: contractAbi.abi,
               functionName: 'newGame',
             }
@@ -62,10 +63,10 @@ export default function GamesPage() {
   )
 }
 
-const Room = ({currentGameId}:any) => {
+const Room = ({currentGameId, chainId}:any) => {
   const currentBlock = useBlockNumber()
   const { data: startTime, refetch } = useReadContract({
-    address: contractAddress["300"].address as `0x${string}`,
+    address: getContractAddress(chainId) as `0x${string}`,
     abi: contractAbi.abi as any,
     functionName: 'startTime',
     args: [currentGameId - 1],

@@ -2,14 +2,15 @@
 import Board from './Board';
 import { useMemo, useRef, useState, useEffect } from "react";
 import Palette from './Palette';
-import { useReadContract, useAccount, useWriteContract } from 'wagmi';
+import { useReadContract, useAccount, useWriteContract, useChainId } from 'wagmi';
 
-import contractAddress from '../../../smart-contract/contract-address.json'
 import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import { colorOptions } from '../config/color';
 import Wallet from './Wallet';
+import { getContractAddress } from '../utils/getContract';
 
 export default function PageBoard({gameId}: {gameId:number}) {
+  const chainId = useChainId()
   const [selectedColor, setSelectedColor]=useState<string>(colorOptions.red)
   const { writeContract } = useWriteContract()
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,7 @@ export default function PageBoard({gameId}: {gameId:number}) {
   });
   const { address } = useAccount()
   const { data: grid, refetch } = useReadContract({
-    address: contractAddress["300"].address as `0x${string}`,
+    address: getContractAddress(chainId) as `0x${string}`,
     abi: contractAbi.abi as any,
     functionName: 'getBoard',
     args: [gameId],
@@ -64,7 +65,7 @@ export default function PageBoard({gameId}: {gameId:number}) {
           coordinates={coordinates}
           setSelectedColor={setSelectedColor}
           placePixel={() => writeContract({
-              address: contractAddress["300"].address as `0x${string}`,
+              address: getContractAddress(chainId) as `0x${string}`,
               abi: contractAbi.abi,
               functionName: 'place',
               args: [gameId,{

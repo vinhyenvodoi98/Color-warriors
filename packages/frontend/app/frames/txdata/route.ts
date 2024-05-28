@@ -6,9 +6,9 @@ import {
   encodeFunctionData,
 } from "viem";
 
-import contractAddress from '../../../../smart-contract/contract-address.json'
 import contractAbi from '../../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import { colorOptions } from "../../config/color";
+import { getContractAddress } from "../../utils/getContract";
 
 export async function POST(
   req: NextRequest
@@ -57,7 +57,7 @@ export async function POST(
     method: "eth_sendTransaction",
     params: {
       abi: contractAbi.abi as Abi,
-      to: contractAddress["300"].address as `0x${string}`,
+      to: getContractAddress(300) as `0x${string}`,
       data: calldata as any,
       value: "0"
     },

@@ -1,10 +1,11 @@
 'use client';
-import { zkSyncSepoliaTestnet } from 'wagmi/chains'
+import { baseSepolia, zkSyncSepoliaTestnet } from 'wagmi/chains'
 import { http, createStorage, cookieStorage } from 'wagmi';
 import { Chain, getDefaultConfig } from '@rainbow-me/rainbowkit';
 const chains: Chain[] = [
   // zkSync,
-  zkSyncSepoliaTestnet
+  zkSyncSepoliaTestnet,
+  baseSepolia
 ]
 
 const projectId = "";
