@@ -4,10 +4,9 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import Palette from './Palette';
 import { useReadContract, useAccount, useWriteContract, useChainId } from 'wagmi';
 
-import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import { colorOptions } from '../config/color';
 import Wallet from './Wallet';
-import { getContractAddress } from '../utils/getContract';
+import { getContractAbi, getContractAddress } from '../utils/getContract';
 
 export default function PageBoard({isEndGame ,gameId}: {isEndGame:boolean, gameId:number}) {
   const chainId = useChainId()
@@ -21,18 +20,28 @@ export default function PageBoard({isEndGame ,gameId}: {isEndGame:boolean, gameI
   const { address } = useAccount()
   const { data: grid, refetch } = useReadContract({
     address: getContractAddress(chainId) as `0x${string}`,
-    abi: contractAbi.abi as any,
+    abi: getContractAbi() as any,
     functionName: 'getBoard',
     args: [gameId],
+  });
+
+  const { data: canPlace, refetch: refetchCanPlace } = useReadContract({
+    address: getContractAddress(chainId) as `0x${string}`,
+    abi: getContractAbi() as any,
+    functionName: 'canPlace',
+    args: [gameId],
+    account: address,
   });
 
   useEffect(() => {
     // Call fetchData immediately when the component renders
     refetch?.()
+    refetchCanPlace?.()
 
     // Set up an interval to call fetchData every 10 seconds
     const interval = setInterval(() => {
       refetch?.()
+      refetchCanPlace?.()
     }, 10000); // 10000 milliseconds = 10 seconds
 
     // Cleanup khi component unmount
@@ -49,36 +58,42 @@ export default function PageBoard({isEndGame ,gameId}: {isEndGame:boolean, gameI
   }, [grid]);
 
   return (
-    <div
-        className='relative bg-base-100 h-[600px] flex flex-col gap-4 justify-center items-center'
-      >
-        {gridColors && (
-          <Board
-            ref={canvasRef}
-            gridColors={gridColors}
-            setCoordinates={setCoordinates}
-          />
-        )}
+    <div className='relative bg-base-100 h-[600px] flex flex-col gap-4 justify-center items-center'>
+      {gridColors && (
+        <Board
+          ref={canvasRef}
+          gridColors={gridColors}
+          setCoordinates={setCoordinates}
+        />
+      )}
         {
           address ?
             !isEndGame ?
-            <Palette
-              colorOptions={colorOptions}
-              coordinates={coordinates}
-              setSelectedColor={setSelectedColor}
-              placePixel={() => writeContract({
-                  address: getContractAddress(chainId) as `0x${string}`,
-                  abi: contractAbi.abi,
-                  functionName: 'place',
-                  args: [gameId,{
-                    x: coordinates.x, //x
-                    y: coordinates.y, //y
-                    color: selectedColor  //color
-                  }] as any,
-                }
-              )}
-              selectedColor={selectedColor}
-            /> :
+              <Palette
+                colorOptions={colorOptions}
+                coordinates={coordinates}
+                canPlace={canPlace as boolean}
+                setSelectedColor={setSelectedColor}
+                placePixel={() => writeContract({
+                    address: getContractAddress(chainId) as `0x${string}`,
+                    abi: getContractAbi(),
+                    functionName: 'place',
+                    args: [gameId,{
+                      x: coordinates.x, //x
+                      y: coordinates.y, //y
+                      color: selectedColor  //color
+                    }] as any,
+                  }
+                )}
+                changeColor={() => writeContract({
+                    address: getContractAddress(chainId) as `0x${string}`,
+                    abi: getContractAbi(),
+                    functionName: 'changeColor',
+                    args: [gameId, selectedColor] as any,
+                  }
+                )}
+                selectedColor={selectedColor}
+              /> :
             <p>Game is Over</p>
           :
         <div>

@@ -7,21 +7,35 @@ type ColorOptions = {
 };
 type Props={
   colorOptions:ColorOptions,
+  canPlace:boolean,
   coordinates:{x:number,y:number},
   setSelectedColor:Dispatch<SetStateAction<string>>,
   placePixel: (() => void) | undefined ;
+  changeColor: (() => void) | undefined ;
   selectedColor: string
 }
 
-const Palette = ({colorOptions,coordinates,placePixel,setSelectedColor,selectedColor}:Props) => {
+const Palette = ({colorOptions,canPlace,coordinates,placePixel,changeColor,setSelectedColor,selectedColor}:Props) => {
   return (
     <div className="relative z-10 block px-5 py-3 overflow-hidden font-medium leading-tight text-gray-800 bg-white border-2 border-gray-900 rounded-lg">
-      <button
-        className="text-center mb-2 w-full rounded-lg py-2 text-white border-2 border-black hover:cursor-pointer hover:bg-red-500 bg-red-600"
-        onClick={placePixel}
-      >
-        Place (${coordinates.x+","+coordinates.y})
-      </button>
+      {
+        canPlace ?
+          <button
+          className="text-center mb-2 w-full rounded-lg py-2 text-white border-2 border-black hover:cursor-pointer hover:bg-red-500 bg-red-600"
+          onClick={placePixel}
+        >
+          Place (${coordinates.x+","+coordinates.y})
+        </button>
+        :
+        <button
+          className="text-center mb-2 w-full rounded-lg py-2 text-white border-2 border-black hover:cursor-pointer hover:bg-red-500 bg-red-600"
+          onClick={changeColor}
+        >
+          Change Color
+        </button>
+
+      }
+
       <div>
         {
           Object.entries(colorOptions).map(([colorName, colorCode]) => (
