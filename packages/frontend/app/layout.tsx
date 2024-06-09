@@ -11,8 +11,12 @@ export default function RootLayout({
     <html lang="en" data-theme="light">
       <body>
         <Providers>
-          <Header />
-          {children}
+          <div className="relative">
+            <div className=" absolute top-0">
+              <Header />
+            </div>
+            {children}
+          </div>
         </Providers>
       </body>
     </html>

@@ -4,8 +4,7 @@ import { useWriteContract, useReadContract, useBlockNumber, useChainId } from 'w
 import contractAbi from '../../../smart-contract/artifacts-zk/contracts/BoardGame.sol/BoardGame.json'
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { getContractAddress } from '../utils/getContract';
-
+import { getContractAbi, getContractAddress } from '../utils/getContract';
 
 export default function GamesPage() {
   const { writeContract } = useWriteContract()
@@ -13,7 +12,7 @@ export default function GamesPage() {
 
   const { data: gameId, refetch } = useReadContract({
     address: getContractAddress(chainId) as `0x${string}`,
-    abi: contractAbi.abi as any,
+    abi: getContractAbi(),
     functionName: 'gameId',
     args: [],
   });

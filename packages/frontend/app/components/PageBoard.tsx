@@ -9,7 +9,7 @@ import { colorOptions } from '../config/color';
 import Wallet from './Wallet';
 import { getContractAddress } from '../utils/getContract';
 
-export default function PageBoard({gameId}: {gameId:number}) {
+export default function PageBoard({isEndGame ,gameId}: {isEndGame:boolean, gameId:number}) {
   const chainId = useChainId()
   const [selectedColor, setSelectedColor]=useState<string>(colorOptions.red)
   const { writeContract } = useWriteContract()
@@ -50,7 +50,7 @@ export default function PageBoard({gameId}: {gameId:number}) {
 
   return (
     <div
-        className='relative bg-base-100 h-[600px] flex flex-col gap-4 justify-center items-center'
+        className='relative bg-base-100 h-screen flex flex-col gap-4 justify-center items-center'
       >
         {gridColors && (
           <Board
@@ -60,23 +60,27 @@ export default function PageBoard({gameId}: {gameId:number}) {
           />
         )}
         {
-          address ? <Palette
-          colorOptions={colorOptions}
-          coordinates={coordinates}
-          setSelectedColor={setSelectedColor}
-          placePixel={() => writeContract({
-              address: getContractAddress(chainId) as `0x${string}`,
-              abi: contractAbi.abi,
-              functionName: 'place',
-              args: [gameId,{
-                x: coordinates.x, //x
-                y: coordinates.y, //y
-                color: selectedColor  //color
-              }] as any,
-            }
-          )}
-          selectedColor={selectedColor}
-        /> :
+          address ?
+            !isEndGame ?
+            <Palette
+              colorOptions={colorOptions}
+              coordinates={coordinates}
+              setSelectedColor={setSelectedColor}
+              placePixel={() => writeContract({
+                  address: getContractAddress(chainId) as `0x${string}`,
+                  abi: contractAbi.abi,
+                  functionName: 'place',
+                  args: [gameId,{
+                    x: coordinates.x, //x
+                    y: coordinates.y, //y
+                    color: selectedColor  //color
+                  }] as any,
+                }
+              )}
+              selectedColor={selectedColor}
+            /> :
+            <p>Game is Over</p>
+          :
         <div>
           <Wallet/>
         </div>
