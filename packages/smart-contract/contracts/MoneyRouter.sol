@@ -2,8 +2,8 @@
 pragma solidity ^0.8.14;
 
 import {
-    ISuperfluid, 
-    ISuperToken, 
+    ISuperfluid,
+    ISuperToken,
     ISuperApp
 } from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
 
@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 error Unauthorized();
 
-contract MoneyRouter {
+contract MoneyRouter is Ownable {
     // ---------------------------------------------------------------------------------------------
     // STATE VARS
 
@@ -22,7 +22,9 @@ contract MoneyRouter {
     /// @notice Allow list.
     mapping(address => bool) public accountList;
 
-    constructor(address _owner) Ownable(_owner) {}
+    constructor(address _owner)
+        Ownable()
+    {}
 
     /// @notice Add account to allow list.
     /// @param _account Account to allow.

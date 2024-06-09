@@ -3,7 +3,7 @@ import fs from "fs";
 require('dotenv').config()
 
 async function main() {
-  const board = await ethers.deployContract("BoardGame", ["0x71C66b00f5799026dB8a4873C761Bd7643828e5E"], {}) as any;
+  const board = await ethers.deployContract("BoardGame", [], {}) as any;
 
   await board.waitForDeployment();
 

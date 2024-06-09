@@ -8,6 +8,7 @@ import type {
   FunctionFragment,
   Result,
   Interface,
+  EventFragment,
   AddressLike,
   ContractRunner,
   ContractMethod,
@@ -17,6 +18,7 @@ import type {
   TypedContractEvent,
   TypedDeferredTopicFilter,
   TypedEventLog,
+  TypedLogDescription,
   TypedListener,
   TypedContractMethod,
 } from "../common";
@@ -31,13 +33,17 @@ export interface MoneyRouterInterface extends Interface {
       | "createFlowIntoContract"
       | "deleteFlowFromContract"
       | "deleteFlowIntoContract"
-      | "moneyRouterOwner"
+      | "owner"
       | "removeAccount"
+      | "renounceOwnership"
       | "sendLumpSumToContract"
+      | "transferOwnership"
       | "updateFlowFromContract"
       | "updateFlowIntoContract"
       | "withdrawFunds"
   ): FunctionFragment;
+
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 
   encodeFunctionData(
     functionFragment: "accountList",
@@ -67,17 +73,22 @@ export interface MoneyRouterInterface extends Interface {
     functionFragment: "deleteFlowIntoContract",
     values: [AddressLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "moneyRouterOwner",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "removeAccount",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "sendLumpSumToContract",
     values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "updateFlowFromContract",
@@ -120,16 +131,21 @@ export interface MoneyRouterInterface extends Interface {
     functionFragment: "deleteFlowIntoContract",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "moneyRouterOwner",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeAccount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "sendLumpSumToContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -144,6 +160,19 @@ export interface MoneyRouterInterface extends Interface {
     functionFragment: "withdrawFunds",
     data: BytesLike
   ): Result;
+}
+
+export namespace OwnershipTransferredEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export interface MoneyRouter extends BaseContract {
@@ -227,7 +256,7 @@ export interface MoneyRouter extends BaseContract {
     "nonpayable"
   >;
 
-  moneyRouterOwner: TypedContractMethod<[], [string], "view">;
+  owner: TypedContractMethod<[], [string], "view">;
 
   removeAccount: TypedContractMethod<
     [_account: AddressLike],
@@ -235,8 +264,16 @@ export interface MoneyRouter extends BaseContract {
     "nonpayable"
   >;
 
+  renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
   sendLumpSumToContract: TypedContractMethod<
     [token: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  transferOwnership: TypedContractMethod<
+    [newOwner: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -297,11 +334,14 @@ export interface MoneyRouter extends BaseContract {
     nameOrSignature: "deleteFlowIntoContract"
   ): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "moneyRouterOwner"
+    nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "removeAccount"
   ): TypedContractMethod<[_account: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "renounceOwnership"
+  ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "sendLumpSumToContract"
   ): TypedContractMethod<
@@ -309,6 +349,9 @@ export interface MoneyRouter extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "transferOwnership"
+  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "updateFlowFromContract"
   ): TypedContractMethod<
@@ -331,5 +374,24 @@ export interface MoneyRouter extends BaseContract {
     "nonpayable"
   >;
 
-  filters: {};
+  getEvent(
+    key: "OwnershipTransferred"
+  ): TypedContractEvent<
+    OwnershipTransferredEvent.InputTuple,
+    OwnershipTransferredEvent.OutputTuple,
+    OwnershipTransferredEvent.OutputObject
+  >;
+
+  filters: {
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferredEvent.InputTuple,
+      OwnershipTransferredEvent.OutputTuple,
+      OwnershipTransferredEvent.OutputObject
+    >;
+    OwnershipTransferred: TypedContractEvent<
+      OwnershipTransferredEvent.InputTuple,
+      OwnershipTransferredEvent.OutputTuple,
+      OwnershipTransferredEvent.OutputObject
+    >;
+  };
 }
