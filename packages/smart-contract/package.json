@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": "https://github.com/matter-labs/zksync-hardhat-template.git",
   "scripts": {
-    "deploy": "hardhat run deploy/deploy.ts --network baseSepolia",
+    "deploy": "hardhat run deploy/deploy.ts --network sepolia",
     "zkdeploy": "hardhat deploy-zksync --script zkdeploy.ts",
     "interact": "hardhat deploy-zksync --script interact.ts",
     "compile": "hardhat compile",
@@ -30,6 +30,8 @@
     "zksync-ethers": "^6.7.0"
   },
   "dependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0"
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@superfluid-finance/ethereum-contracts": "^1.9.1",
+    "@superfluid-finance/sdk-core": "^0.7.0"
   }
 }

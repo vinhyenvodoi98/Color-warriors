@@ -2,10 +2,10 @@
 pragma solidity ^0.8.0;
 import { PlaceStruct } from "./helpers/Struct.sol";
 
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+// import "./MoneyRouter.sol";
 
-contract BoardGame is Ownable {
+contract BoardGame {
     using Counters for Counters.Counter;
     Counters.Counter public gameId;
     mapping(uint256 => string[10][10]) public boards;
@@ -20,6 +20,8 @@ contract BoardGame is Ownable {
     string BLUE="#3b82f6";
 
     event Placed(uint256 gameId, address user, uint256 x, uint256 y, string color);
+
+    // constructor(address owner) MoneyRouter(owner){}
 
     function place(uint256 _gameId, PlaceStruct calldata input) external {
         require(stringCompare(input.color, RED) || stringCompare(input.color, YELLOW) || stringCompare(input.color, BLUE), "This color is not allowed");

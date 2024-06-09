@@ -25,6 +25,11 @@ const config: HardhatUserConfig = {
       accounts: [WALLET_PRIVATE_KEY as string],
       chainId: 84532,
     },
+    sepolia: {
+      url: "https://rpc.sepolia.org",
+      accounts: [WALLET_PRIVATE_KEY as string],
+      chainId: 11155111,
+    },
     hardhat: {
       zksync: true,
     },

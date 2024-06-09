@@ -14,6 +14,66 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "BootloaderUtilities",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BootloaderUtilities__factory>;
+    getContractFactory(
+      name: "IAccountCodeStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAccountCodeStorage__factory>;
+    getContractFactory(
+      name: "IBootloaderUtilities",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IBootloaderUtilities__factory>;
+    getContractFactory(
+      name: "IBytecodeCompressor",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IBytecodeCompressor__factory>;
+    getContractFactory(
+      name: "IContractDeployer",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IContractDeployer__factory>;
+    getContractFactory(
+      name: "IEthToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IEthToken__factory>;
+    getContractFactory(
+      name: "IImmutableSimulator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IImmutableSimulator__factory>;
+    getContractFactory(
+      name: "IKnownCodesStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IKnownCodesStorage__factory>;
+    getContractFactory(
+      name: "IL1Messenger",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IL1Messenger__factory>;
+    getContractFactory(
+      name: "INonceHolder",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.INonceHolder__factory>;
+    getContractFactory(
+      name: "IPaymaster",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPaymaster__factory>;
+    getContractFactory(
+      name: "IPaymasterFlow",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPaymasterFlow__factory>;
+    getContractFactory(
+      name: "ISystemContext",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISystemContext__factory>;
+    getContractFactory(
+      name: "IERC20Permit",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Permit__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
       name: "Ownable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Ownable__factory>;
@@ -102,6 +162,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC721Receiver__factory>;
     getContractFactory(
+      name: "IERC777",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC777__factory>;
+    getContractFactory(
       name: "ERC165",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC165__factory>;
@@ -109,6 +173,82 @@ declare module "hardhat/types/runtime" {
       name: "IERC165",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
+    getContractFactory(
+      name: "IGeneralDistributionAgreementV1",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IGeneralDistributionAgreementV1__factory>;
+    getContractFactory(
+      name: "IPoolAdminNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPoolAdminNFT__factory>;
+    getContractFactory(
+      name: "IPoolMemberNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPoolMemberNFT__factory>;
+    getContractFactory(
+      name: "IPoolNFTBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPoolNFTBase__factory>;
+    getContractFactory(
+      name: "ISuperfluidPool",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperfluidPool__factory>;
+    getContractFactory(
+      name: "IConstantFlowAgreementV1",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IConstantFlowAgreementV1__factory>;
+    getContractFactory(
+      name: "IInstantDistributionAgreementV1",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IInstantDistributionAgreementV1__factory>;
+    getContractFactory(
+      name: "IConstantInflowNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IConstantInflowNFT__factory>;
+    getContractFactory(
+      name: "IConstantOutflowNFT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IConstantOutflowNFT__factory>;
+    getContractFactory(
+      name: "IFlowNFTBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IFlowNFTBase__factory>;
+    getContractFactory(
+      name: "ISuperAgreement",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperAgreement__factory>;
+    getContractFactory(
+      name: "ISuperApp",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperApp__factory>;
+    getContractFactory(
+      name: "ISuperfluid",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperfluid__factory>;
+    getContractFactory(
+      name: "ISuperfluidGovernance",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperfluidGovernance__factory>;
+    getContractFactory(
+      name: "ISuperfluidToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperfluidToken__factory>;
+    getContractFactory(
+      name: "ISuperToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperToken__factory>;
+    getContractFactory(
+      name: "ISuperTokenFactory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISuperTokenFactory__factory>;
+    getContractFactory(
+      name: "ISETH",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISETH__factory>;
+    getContractFactory(
+      name: "ISETHCustom",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISETHCustom__factory>;
     getContractFactory(
       name: "BoardGame",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -122,11 +262,90 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Greeter__factory>;
     getContractFactory(
+      name: "MoneyRouter",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MoneyRouter__factory>;
+    getContractFactory(
       name: "MyNFT",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyNFT__factory>;
 
     getContractAt(
+      name: "BootloaderUtilities",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BootloaderUtilities>;
+    getContractAt(
+      name: "IAccountCodeStorage",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAccountCodeStorage>;
+    getContractAt(
+      name: "IBootloaderUtilities",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBootloaderUtilities>;
+    getContractAt(
+      name: "IBytecodeCompressor",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBytecodeCompressor>;
+    getContractAt(
+      name: "IContractDeployer",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IContractDeployer>;
+    getContractAt(
+      name: "IEthToken",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IEthToken>;
+    getContractAt(
+      name: "IImmutableSimulator",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IImmutableSimulator>;
+    getContractAt(
+      name: "IKnownCodesStorage",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IKnownCodesStorage>;
+    getContractAt(
+      name: "IL1Messenger",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IL1Messenger>;
+    getContractAt(
+      name: "INonceHolder",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.INonceHolder>;
+    getContractAt(
+      name: "IPaymaster",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPaymaster>;
+    getContractAt(
+      name: "IPaymasterFlow",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPaymasterFlow>;
+    getContractAt(
+      name: "ISystemContext",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISystemContext>;
+    getContractAt(
+      name: "IERC20Permit",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Permit>;
+    getContractAt(
+      name: "IERC20",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
       name: "Ownable",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -237,6 +456,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC721Receiver>;
     getContractAt(
+      name: "IERC777",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC777>;
+    getContractAt(
       name: "ERC165",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -246,6 +470,101 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
+    getContractAt(
+      name: "IGeneralDistributionAgreementV1",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IGeneralDistributionAgreementV1>;
+    getContractAt(
+      name: "IPoolAdminNFT",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPoolAdminNFT>;
+    getContractAt(
+      name: "IPoolMemberNFT",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPoolMemberNFT>;
+    getContractAt(
+      name: "IPoolNFTBase",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPoolNFTBase>;
+    getContractAt(
+      name: "ISuperfluidPool",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperfluidPool>;
+    getContractAt(
+      name: "IConstantFlowAgreementV1",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IConstantFlowAgreementV1>;
+    getContractAt(
+      name: "IInstantDistributionAgreementV1",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IInstantDistributionAgreementV1>;
+    getContractAt(
+      name: "IConstantInflowNFT",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IConstantInflowNFT>;
+    getContractAt(
+      name: "IConstantOutflowNFT",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IConstantOutflowNFT>;
+    getContractAt(
+      name: "IFlowNFTBase",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IFlowNFTBase>;
+    getContractAt(
+      name: "ISuperAgreement",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperAgreement>;
+    getContractAt(
+      name: "ISuperApp",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperApp>;
+    getContractAt(
+      name: "ISuperfluid",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperfluid>;
+    getContractAt(
+      name: "ISuperfluidGovernance",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperfluidGovernance>;
+    getContractAt(
+      name: "ISuperfluidToken",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperfluidToken>;
+    getContractAt(
+      name: "ISuperToken",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperToken>;
+    getContractAt(
+      name: "ISuperTokenFactory",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISuperTokenFactory>;
+    getContractAt(
+      name: "ISETH",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISETH>;
+    getContractAt(
+      name: "ISETHCustom",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISETHCustom>;
     getContractAt(
       name: "BoardGame",
       address: string | ethers.Addressable,
@@ -261,6 +580,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Greeter>;
+    getContractAt(
+      name: "MoneyRouter",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MoneyRouter>;
     getContractAt(
       name: "MyNFT",
       address: string | ethers.Addressable,
@@ -268,6 +592,66 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.MyNFT>;
 
     deployContract(
+      name: "BootloaderUtilities",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.BootloaderUtilities>;
+    deployContract(
+      name: "IAccountCodeStorage",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAccountCodeStorage>;
+    deployContract(
+      name: "IBootloaderUtilities",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IBootloaderUtilities>;
+    deployContract(
+      name: "IBytecodeCompressor",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IBytecodeCompressor>;
+    deployContract(
+      name: "IContractDeployer",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IContractDeployer>;
+    deployContract(
+      name: "IEthToken",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IEthToken>;
+    deployContract(
+      name: "IImmutableSimulator",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IImmutableSimulator>;
+    deployContract(
+      name: "IKnownCodesStorage",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IKnownCodesStorage>;
+    deployContract(
+      name: "IL1Messenger",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IL1Messenger>;
+    deployContract(
+      name: "INonceHolder",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.INonceHolder>;
+    deployContract(
+      name: "IPaymaster",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPaymaster>;
+    deployContract(
+      name: "IPaymasterFlow",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPaymasterFlow>;
+    deployContract(
+      name: "ISystemContext",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISystemContext>;
+    deployContract(
+      name: "IERC20Permit",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC20Permit>;
+    deployContract(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC20>;
+    deployContract(
       name: "Ownable",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Ownable>;
@@ -356,6 +740,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC721Receiver>;
     deployContract(
+      name: "IERC777",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC777>;
+    deployContract(
       name: "ERC165",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ERC165>;
@@ -363,6 +751,82 @@ declare module "hardhat/types/runtime" {
       name: "IERC165",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC165>;
+    deployContract(
+      name: "IGeneralDistributionAgreementV1",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IGeneralDistributionAgreementV1>;
+    deployContract(
+      name: "IPoolAdminNFT",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPoolAdminNFT>;
+    deployContract(
+      name: "IPoolMemberNFT",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPoolMemberNFT>;
+    deployContract(
+      name: "IPoolNFTBase",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPoolNFTBase>;
+    deployContract(
+      name: "ISuperfluidPool",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluidPool>;
+    deployContract(
+      name: "IConstantFlowAgreementV1",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IConstantFlowAgreementV1>;
+    deployContract(
+      name: "IInstantDistributionAgreementV1",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IInstantDistributionAgreementV1>;
+    deployContract(
+      name: "IConstantInflowNFT",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IConstantInflowNFT>;
+    deployContract(
+      name: "IConstantOutflowNFT",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IConstantOutflowNFT>;
+    deployContract(
+      name: "IFlowNFTBase",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IFlowNFTBase>;
+    deployContract(
+      name: "ISuperAgreement",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperAgreement>;
+    deployContract(
+      name: "ISuperApp",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperApp>;
+    deployContract(
+      name: "ISuperfluid",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluid>;
+    deployContract(
+      name: "ISuperfluidGovernance",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluidGovernance>;
+    deployContract(
+      name: "ISuperfluidToken",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluidToken>;
+    deployContract(
+      name: "ISuperToken",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperToken>;
+    deployContract(
+      name: "ISuperTokenFactory",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperTokenFactory>;
+    deployContract(
+      name: "ISETH",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISETH>;
+    deployContract(
+      name: "ISETHCustom",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISETHCustom>;
     deployContract(
       name: "BoardGame",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -375,12 +839,91 @@ declare module "hardhat/types/runtime" {
       name: "Greeter",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Greeter>;
+    deployContract(
+      name: "MoneyRouter",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MoneyRouter>;
     deployContract(
       name: "MyNFT",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyNFT>;
 
     deployContract(
+      name: "BootloaderUtilities",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.BootloaderUtilities>;
+    deployContract(
+      name: "IAccountCodeStorage",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAccountCodeStorage>;
+    deployContract(
+      name: "IBootloaderUtilities",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IBootloaderUtilities>;
+    deployContract(
+      name: "IBytecodeCompressor",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IBytecodeCompressor>;
+    deployContract(
+      name: "IContractDeployer",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IContractDeployer>;
+    deployContract(
+      name: "IEthToken",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IEthToken>;
+    deployContract(
+      name: "IImmutableSimulator",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IImmutableSimulator>;
+    deployContract(
+      name: "IKnownCodesStorage",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IKnownCodesStorage>;
+    deployContract(
+      name: "IL1Messenger",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IL1Messenger>;
+    deployContract(
+      name: "INonceHolder",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.INonceHolder>;
+    deployContract(
+      name: "IPaymaster",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPaymaster>;
+    deployContract(
+      name: "IPaymasterFlow",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPaymasterFlow>;
+    deployContract(
+      name: "ISystemContext",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISystemContext>;
+    deployContract(
+      name: "IERC20Permit",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC20Permit>;
+    deployContract(
+      name: "IERC20",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC20>;
+    deployContract(
       name: "Ownable",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -491,6 +1034,11 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC721Receiver>;
     deployContract(
+      name: "IERC777",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC777>;
+    deployContract(
       name: "ERC165",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -500,6 +1048,101 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC165>;
+    deployContract(
+      name: "IGeneralDistributionAgreementV1",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IGeneralDistributionAgreementV1>;
+    deployContract(
+      name: "IPoolAdminNFT",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPoolAdminNFT>;
+    deployContract(
+      name: "IPoolMemberNFT",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPoolMemberNFT>;
+    deployContract(
+      name: "IPoolNFTBase",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPoolNFTBase>;
+    deployContract(
+      name: "ISuperfluidPool",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluidPool>;
+    deployContract(
+      name: "IConstantFlowAgreementV1",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IConstantFlowAgreementV1>;
+    deployContract(
+      name: "IInstantDistributionAgreementV1",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IInstantDistributionAgreementV1>;
+    deployContract(
+      name: "IConstantInflowNFT",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IConstantInflowNFT>;
+    deployContract(
+      name: "IConstantOutflowNFT",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IConstantOutflowNFT>;
+    deployContract(
+      name: "IFlowNFTBase",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IFlowNFTBase>;
+    deployContract(
+      name: "ISuperAgreement",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperAgreement>;
+    deployContract(
+      name: "ISuperApp",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperApp>;
+    deployContract(
+      name: "ISuperfluid",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluid>;
+    deployContract(
+      name: "ISuperfluidGovernance",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluidGovernance>;
+    deployContract(
+      name: "ISuperfluidToken",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperfluidToken>;
+    deployContract(
+      name: "ISuperToken",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperToken>;
+    deployContract(
+      name: "ISuperTokenFactory",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISuperTokenFactory>;
+    deployContract(
+      name: "ISETH",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISETH>;
+    deployContract(
+      name: "ISETHCustom",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISETHCustom>;
     deployContract(
       name: "BoardGame",
       args: any[],
@@ -515,6 +1158,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Greeter>;
+    deployContract(
+      name: "MoneyRouter",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MoneyRouter>;
     deployContract(
       name: "MyNFT",
       args: any[],

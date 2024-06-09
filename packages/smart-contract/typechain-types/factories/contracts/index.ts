@@ -5,3 +5,4 @@ export * as erc20 from "./erc20";
 export * as nft from "./nft";
 export { BoardGame__factory } from "./BoardGame__factory";
 export { Greeter__factory } from "./Greeter__factory";
+export { MoneyRouter__factory } from "./MoneyRouter__factory";

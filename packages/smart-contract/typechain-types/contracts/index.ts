@@ -7,3 +7,4 @@ import type * as nft from "./nft";
 export type { nft };
 export type { BoardGame } from "./BoardGame";
 export type { Greeter } from "./Greeter";
+export type { MoneyRouter } from "./MoneyRouter";

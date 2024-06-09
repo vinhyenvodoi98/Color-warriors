@@ -38,28 +38,49 @@ export type PlaceStructStructOutput = [x: bigint, y: bigint, color: string] & {
 export interface BoardGameInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "accountList"
+      | "allowAccount"
       | "boards"
       | "changeColor"
+      | "changeOwner"
       | "colorCount"
+      | "createFlowFromContract"
+      | "createFlowIntoContract"
+      | "deleteFlowFromContract"
+      | "deleteFlowIntoContract"
       | "gameId"
       | "getBoard"
       | "getWinningColor"
       | "isUserWin"
+      | "moneyRouterOwner"
       | "newGame"
       | "owner"
       | "place"
+      | "removeAccount"
       | "renounceOwnership"
+      | "sendLumpSumToContract"
       | "startTime"
       | "stringCompare"
       | "transferOwnership"
+      | "updateFlowFromContract"
+      | "updateFlowIntoContract"
       | "userColor"
       | "userLocation"
+      | "withdrawFunds"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred" | "Placed"
   ): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "accountList",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allowAccount",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "boards",
     values: [BigNumberish, BigNumberish, BigNumberish]
@@ -69,8 +90,28 @@ export interface BoardGameInterface extends Interface {
     values: [BigNumberish, string]
   ): string;
   encodeFunctionData(
+    functionFragment: "changeOwner",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "colorCount",
     values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "createFlowFromContract",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "createFlowIntoContract",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "deleteFlowFromContract",
+    values: [AddressLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "deleteFlowIntoContract",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "gameId", values?: undefined): string;
   encodeFunctionData(
@@ -85,6 +126,10 @@ export interface BoardGameInterface extends Interface {
     functionFragment: "isUserWin",
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "moneyRouterOwner",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "newGame", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -92,8 +137,16 @@ export interface BoardGameInterface extends Interface {
     values: [BigNumberish, PlaceStructStruct]
   ): string;
   encodeFunctionData(
+    functionFragment: "removeAccount",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendLumpSumToContract",
+    values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "startTime",
@@ -108,6 +161,14 @@ export interface BoardGameInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "updateFlowFromContract",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateFlowIntoContract",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "userColor",
     values: [BigNumberish, AddressLike]
   ): string;
@@ -115,13 +176,45 @@ export interface BoardGameInterface extends Interface {
     functionFragment: "userLocation",
     values: [BigNumberish, AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawFunds",
+    values: [AddressLike, BigNumberish]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "accountList",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "allowAccount",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "boards", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "changeColor",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeOwner",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "colorCount", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "createFlowFromContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "createFlowIntoContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "deleteFlowFromContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "deleteFlowIntoContract",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "gameId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getBoard", data: BytesLike): Result;
   decodeFunctionResult(
@@ -129,11 +222,23 @@ export interface BoardGameInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "isUserWin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "moneyRouterOwner",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "newGame", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "place", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "removeAccount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendLumpSumToContract",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "startTime", data: BytesLike): Result;
@@ -145,9 +250,21 @@ export interface BoardGameInterface extends Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateFlowFromContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateFlowIntoContract",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "userColor", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "userLocation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawFunds",
     data: BytesLike
   ): Result;
 }
@@ -236,6 +353,14 @@ export interface BoardGame extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  accountList: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  allowAccount: TypedContractMethod<
+    [_account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   boards: TypedContractMethod<
     [arg0: BigNumberish, arg1: BigNumberish, arg2: BigNumberish],
     [string],
@@ -248,10 +373,40 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
 
+  changeOwner: TypedContractMethod<
+    [_newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   colorCount: TypedContractMethod<
     [arg0: BigNumberish, arg1: string],
     [bigint],
     "view"
+  >;
+
+  createFlowFromContract: TypedContractMethod<
+    [token: AddressLike, receiver: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  createFlowIntoContract: TypedContractMethod<
+    [token: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  deleteFlowFromContract: TypedContractMethod<
+    [token: AddressLike, receiver: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  deleteFlowIntoContract: TypedContractMethod<
+    [token: AddressLike],
+    [void],
+    "nonpayable"
   >;
 
   gameId: TypedContractMethod<[], [bigint], "view">;
@@ -266,6 +421,8 @@ export interface BoardGame extends BaseContract {
 
   isUserWin: TypedContractMethod<[_gameId: BigNumberish], [boolean], "view">;
 
+  moneyRouterOwner: TypedContractMethod<[], [string], "view">;
+
   newGame: TypedContractMethod<[], [void], "nonpayable">;
 
   owner: TypedContractMethod<[], [string], "view">;
@@ -276,7 +433,19 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
 
+  removeAccount: TypedContractMethod<
+    [_account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  sendLumpSumToContract: TypedContractMethod<
+    [token: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   startTime: TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
 
@@ -288,6 +457,18 @@ export interface BoardGame extends BaseContract {
 
   transferOwnership: TypedContractMethod<
     [newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  updateFlowFromContract: TypedContractMethod<
+    [token: AddressLike, receiver: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  updateFlowIntoContract: TypedContractMethod<
+    [token: AddressLike, flowRate: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -304,10 +485,22 @@ export interface BoardGame extends BaseContract {
     "view"
   >;
 
+  withdrawFunds: TypedContractMethod<
+    [token: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "accountList"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "allowAccount"
+  ): TypedContractMethod<[_account: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "boards"
   ): TypedContractMethod<
@@ -323,8 +516,35 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "changeOwner"
+  ): TypedContractMethod<[_newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(
     nameOrSignature: "colorCount"
   ): TypedContractMethod<[arg0: BigNumberish, arg1: string], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "createFlowFromContract"
+  ): TypedContractMethod<
+    [token: AddressLike, receiver: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "createFlowIntoContract"
+  ): TypedContractMethod<
+    [token: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "deleteFlowFromContract"
+  ): TypedContractMethod<
+    [token: AddressLike, receiver: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "deleteFlowIntoContract"
+  ): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "gameId"
   ): TypedContractMethod<[], [bigint], "view">;
@@ -337,6 +557,9 @@ export interface BoardGame extends BaseContract {
   getFunction(
     nameOrSignature: "isUserWin"
   ): TypedContractMethod<[_gameId: BigNumberish], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "moneyRouterOwner"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "newGame"
   ): TypedContractMethod<[], [void], "nonpayable">;
@@ -351,8 +574,18 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "removeAccount"
+  ): TypedContractMethod<[_account: AddressLike], [void], "nonpayable">;
+  getFunction(
     nameOrSignature: "renounceOwnership"
   ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "sendLumpSumToContract"
+  ): TypedContractMethod<
+    [token: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "startTime"
   ): TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
@@ -367,6 +600,20 @@ export interface BoardGame extends BaseContract {
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "updateFlowFromContract"
+  ): TypedContractMethod<
+    [token: AddressLike, receiver: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "updateFlowIntoContract"
+  ): TypedContractMethod<
+    [token: AddressLike, flowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
     nameOrSignature: "userColor"
   ): TypedContractMethod<
     [arg0: BigNumberish, arg1: AddressLike],
@@ -379,6 +626,13 @@ export interface BoardGame extends BaseContract {
     [arg0: BigNumberish, arg1: AddressLike, arg2: BigNumberish],
     [bigint],
     "view"
+  >;
+  getFunction(
+    nameOrSignature: "withdrawFunds"
+  ): TypedContractMethod<
+    [token: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
   >;
 
   getEvent(
