@@ -50,7 +50,7 @@ export default function PageBoard({isEndGame ,gameId}: {isEndGame:boolean, gameI
 
   return (
     <div
-        className='relative bg-base-100 h-screen flex flex-col gap-4 justify-center items-center'
+        className='relative bg-base-100 h-[600px] flex flex-col gap-4 justify-center items-center'
       >
         {gridColors && (
           <Board
