@@ -3,16 +3,33 @@ pragma solidity ^0.8.0;
 import { PlaceStruct } from "./helpers/Struct.sol";
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-// import "./MoneyRouter.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract BoardGame {
+import {
+    ISuperfluid,
+    ISuperToken,
+    ISuperApp
+} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+
+import { SuperTokenV1Library } from "@superfluid-finance/ethereum-contracts/contracts/apps/SuperTokenV1Library.sol";
+
+contract BoardGame is Ownable {
+    /// @notice CFA Library.
+    using SuperTokenV1Library for ISuperToken;
+
+    /// @notice Counter Library.
     using Counters for Counters.Counter;
+
     Counters.Counter public gameId;
     mapping(uint256 => string[10][10]) public boards;
     mapping(uint256 => mapping(address => uint8[2])) public userLocation;
     mapping(uint256 => uint256) public startTime;
     mapping(uint256 => mapping(address => string)) public userColor;
     mapping(uint256 => mapping(string => address[])) public listOfColorUser;
+
+    address public superToken;
+    string public currentWinColor;
+    int96 public sharedPriceRate = 3805175038; // 0.01 per month
 
     uint256 PLAYTIME = 420; // 420s Each game has 7 minutes
     string RED="#ef4444";
@@ -21,7 +38,9 @@ contract BoardGame {
 
     event Placed(uint256 gameId, address user, uint256 x, uint256 y, string color);
 
-    // constructor(address owner) MoneyRouter(owner){}
+    constructor(address _owner, address _superToken) Ownable() {
+        superToken = _superToken;
+    }
 
     function place(uint256 _gameId, PlaceStruct calldata input) external {
         require(stringCompare(input.color, RED) || stringCompare(input.color, YELLOW) || stringCompare(input.color, BLUE), "This color is not allowed");
@@ -119,5 +138,66 @@ contract BoardGame {
         }
         // if not found return array length
         return addresses.length;
+    }
+
+    // Superfluid
+    function updateSuperToken(address _superToken) external onlyOwner {
+        superToken = _superToken;
+    }
+
+    function sendLumpSumToContract(uint256 _amount) external onlyOwner {
+        ISuperToken token = ISuperToken(superToken);
+        token.transferFrom(msg.sender, address(this), _amount);
+    }
+
+    function withdrawFunds(uint256 _amount) external onlyOwner {
+        ISuperToken token = ISuperToken(superToken);
+        token.transfer(msg.sender, _amount);
+    }
+
+    function distributedToken(uint256 _gameId, address _lastestPlayer) internal {
+        string memory winColor = getWinningColor(_gameId);
+        ISuperToken token = ISuperToken(superToken);
+
+        address[] memory oldAddresses = listOfColorUser[_gameId][currentWinColor];
+        address[] memory newAddresses = listOfColorUser[_gameId][winColor];
+
+        int96 flowRate = sharedPriceRate / int96(int256(newAddresses.length));
+
+        if(stringCompare(winColor, "no_one")) { // if no win color
+            if(!stringCompare(currentWinColor,"")) { // delete all flow to old win color
+                for (uint i = 0; i < oldAddresses.length; i++) {
+                    token.deleteFlow(address(this), oldAddresses[i]);
+                }
+                currentWinColor = ""; // reset currentWinColor
+            }
+        } else { // if we have win color
+            if(!stringCompare(currentWinColor,"")) { // if we also have old win color
+                if(stringCompare(winColor, currentWinColor)) { // if current color same with new win color
+                    for (uint i = 0; i < newAddresses.length; i++) {
+                        if(newAddresses[i] == _lastestPlayer) {
+                            token.createFlow(_lastestPlayer, flowRate); // create new stream for lastest player
+                        }
+                        token.updateFlow(newAddresses[i], flowRate); // update stream for old win player
+                    }
+                } else { // if new win color is difference with old win color
+                    for (uint i = 0; i < oldAddresses.length; i++) {
+                        token.deleteFlow(address(this), oldAddresses[i]); // remove all old win address
+                    }
+
+                    for (uint i = 0; i < newAddresses.length; i++) {
+                        token.createFlow(newAddresses[i], flowRate); // create stream for new array addresses
+                    }
+
+                    currentWinColor = winColor; // reset
+                }
+            } else {  // if we don't have old win color
+                for (uint i = 0; i < newAddresses.length; i++) {
+                    token.createFlow(newAddresses[i], flowRate); // create stream for new array addresses
+                }
+
+                currentWinColor = winColor; // reset
+            }
+        }
     }
 }

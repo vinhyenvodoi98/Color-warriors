@@ -41,21 +41,32 @@ export interface BoardGameInterface extends Interface {
       | "boards"
       | "canPlace"
       | "changeColor"
+      | "currentWinColor"
       | "gameId"
       | "getBoard"
       | "getWinningColor"
       | "isUserWin"
       | "listOfColorUser"
       | "newGame"
+      | "owner"
       | "place"
       | "removeAddress"
+      | "renounceOwnership"
+      | "sendLumpSumToContract"
+      | "sharedPriceRate"
       | "startTime"
       | "stringCompare"
+      | "superToken"
+      | "transferOwnership"
+      | "updateSuperToken"
       | "userColor"
       | "userLocation"
+      | "withdrawFunds"
   ): FunctionFragment;
 
-  getEvent(nameOrSignatureOrTopic: "Placed"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "OwnershipTransferred" | "Placed"
+  ): EventFragment;
 
   encodeFunctionData(
     functionFragment: "boards",
@@ -68,6 +79,10 @@ export interface BoardGameInterface extends Interface {
   encodeFunctionData(
     functionFragment: "changeColor",
     values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentWinColor",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "gameId", values?: undefined): string;
   encodeFunctionData(
@@ -87,6 +102,7 @@ export interface BoardGameInterface extends Interface {
     values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "newGame", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "place",
     values: [BigNumberish, PlaceStructStruct]
@@ -94,6 +110,18 @@ export interface BoardGameInterface extends Interface {
   encodeFunctionData(
     functionFragment: "removeAddress",
     values: [BigNumberish, string, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sendLumpSumToContract",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sharedPriceRate",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "startTime",
@@ -104,6 +132,18 @@ export interface BoardGameInterface extends Interface {
     values: [string, string]
   ): string;
   encodeFunctionData(
+    functionFragment: "superToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateSuperToken",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "userColor",
     values: [BigNumberish, AddressLike]
   ): string;
@@ -111,11 +151,19 @@ export interface BoardGameInterface extends Interface {
     functionFragment: "userLocation",
     values: [BigNumberish, AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawFunds",
+    values: [BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "boards", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "canPlace", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "changeColor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentWinColor",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "gameId", data: BytesLike): Result;
@@ -130,9 +178,22 @@ export interface BoardGameInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "newGame", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "place", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sendLumpSumToContract",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "sharedPriceRate",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "startTime", data: BytesLike): Result;
@@ -140,11 +201,37 @@ export interface BoardGameInterface extends Interface {
     functionFragment: "stringCompare",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "superToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateSuperToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "userColor", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "userLocation",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawFunds",
+    data: BytesLike
+  ): Result;
+}
+
+export namespace OwnershipTransferredEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace PlacedEvent {
@@ -232,6 +319,8 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
 
+  currentWinColor: TypedContractMethod<[], [string], "view">;
+
   gameId: TypedContractMethod<[], [bigint], "view">;
 
   getBoard: TypedContractMethod<[_gameId: BigNumberish], [string[][]], "view">;
@@ -252,6 +341,8 @@ export interface BoardGame extends BaseContract {
 
   newGame: TypedContractMethod<[], [void], "nonpayable">;
 
+  owner: TypedContractMethod<[], [string], "view">;
+
   place: TypedContractMethod<
     [_gameId: BigNumberish, input: PlaceStructStruct],
     [void],
@@ -264,12 +355,36 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
 
+  renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  sendLumpSumToContract: TypedContractMethod<
+    [_amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  sharedPriceRate: TypedContractMethod<[], [bigint], "view">;
+
   startTime: TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
 
   stringCompare: TypedContractMethod<
     [_string1: string, _string2: string],
     [boolean],
     "view"
+  >;
+
+  superToken: TypedContractMethod<[], [string], "view">;
+
+  transferOwnership: TypedContractMethod<
+    [newOwner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  updateSuperToken: TypedContractMethod<
+    [_superToken: AddressLike],
+    [void],
+    "nonpayable"
   >;
 
   userColor: TypedContractMethod<
@@ -282,6 +397,12 @@ export interface BoardGame extends BaseContract {
     [arg0: BigNumberish, arg1: AddressLike, arg2: BigNumberish],
     [bigint],
     "view"
+  >;
+
+  withdrawFunds: TypedContractMethod<
+    [_amount: BigNumberish],
+    [void],
+    "nonpayable"
   >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
@@ -306,6 +427,9 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "currentWinColor"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "gameId"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
@@ -328,6 +452,9 @@ export interface BoardGame extends BaseContract {
     nameOrSignature: "newGame"
   ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "owner"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "place"
   ): TypedContractMethod<
     [_gameId: BigNumberish, input: PlaceStructStruct],
@@ -342,6 +469,15 @@ export interface BoardGame extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "renounceOwnership"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "sendLumpSumToContract"
+  ): TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "sharedPriceRate"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
     nameOrSignature: "startTime"
   ): TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
   getFunction(
@@ -351,6 +487,15 @@ export interface BoardGame extends BaseContract {
     [boolean],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "superToken"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "transferOwnership"
+  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "updateSuperToken"
+  ): TypedContractMethod<[_superToken: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "userColor"
   ): TypedContractMethod<
@@ -365,7 +510,17 @@ export interface BoardGame extends BaseContract {
     [bigint],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "withdrawFunds"
+  ): TypedContractMethod<[_amount: BigNumberish], [void], "nonpayable">;
 
+  getEvent(
+    key: "OwnershipTransferred"
+  ): TypedContractEvent<
+    OwnershipTransferredEvent.InputTuple,
+    OwnershipTransferredEvent.OutputTuple,
+    OwnershipTransferredEvent.OutputObject
+  >;
   getEvent(
     key: "Placed"
   ): TypedContractEvent<
@@ -375,6 +530,17 @@ export interface BoardGame extends BaseContract {
   >;
 
   filters: {
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferredEvent.InputTuple,
+      OwnershipTransferredEvent.OutputTuple,
+      OwnershipTransferredEvent.OutputObject
+    >;
+    OwnershipTransferred: TypedContractEvent<
+      OwnershipTransferredEvent.InputTuple,
+      OwnershipTransferredEvent.OutputTuple,
+      OwnershipTransferredEvent.OutputObject
+    >;
+
     "Placed(uint256,address,uint256,uint256,string)": TypedContractEvent<
       PlacedEvent.InputTuple,
       PlacedEvent.OutputTuple,
