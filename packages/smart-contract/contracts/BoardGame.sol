@@ -38,7 +38,7 @@ contract BoardGame is Ownable {
 
     event Placed(uint256 gameId, address user, uint256 x, uint256 y, string color);
 
-    constructor(address _owner, address _superToken) Ownable() {
+    constructor(address _superToken) Ownable() {
         superToken = _superToken;
     }
 
@@ -51,6 +51,7 @@ contract BoardGame is Ownable {
         userLocation[_gameId][msg.sender][1]= input.y;
         userColor[_gameId][msg.sender] = input.color;
         listOfColorUser[_gameId][input.color].push(msg.sender);
+        distributedToken(_gameId, msg.sender);
         emit Placed(_gameId, msg.sender, input.x, input.y, input.color);
     }
 
@@ -62,6 +63,7 @@ contract BoardGame is Ownable {
         boards[_gameId][userLocation[_gameId][msg.sender][0]][userLocation[_gameId][msg.sender][1]] = _color;
         listOfColorUser[_gameId][_color].push(msg.sender);
         removeAddress(_gameId, _color, msg.sender);
+        distributedToken(_gameId, msg.sender);
         emit Placed(_gameId, msg.sender, userLocation[_gameId][msg.sender][0], userLocation[_gameId][msg.sender][1], _color);
     }
 
@@ -69,6 +71,11 @@ contract BoardGame is Ownable {
         uint256 redNumber= listOfColorUser[_gameId][RED].length;
         uint256 blueNumber= listOfColorUser[_gameId][BLUE].length;
         uint256 yellowNumber= listOfColorUser[_gameId][YELLOW].length;
+
+        // test distributed price
+        if(redNumber == 1 && blueNumber == 0 && yellowNumber == 0) {
+            return RED;
+        }
 
         if(redNumber < yellowNumber) { // Red < Yellow
             if(redNumber < blueNumber) { // Red < Blue

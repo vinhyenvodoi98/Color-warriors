@@ -3,7 +3,10 @@ import fs from "fs";
 require('dotenv').config()
 
 async function main() {
-  const board = await ethers.deployContract("BoardGame", [], {}) as any;
+  // const owner = "0x71C66b00f5799026dB8a4873C761Bd7643828e5E";
+  const superToken = "0x22064a21FEE226D8fFB8818E7627d5FF6D0Fc33a"
+
+  const board = await ethers.deployContract("BoardGame", [superToken], {}) as any;
 
   await board.waitForDeployment();
 
