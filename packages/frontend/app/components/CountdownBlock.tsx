@@ -12,9 +12,9 @@ export default function CountDownBlock({ endBlock, currentBlock }: CountdownBloc
     const difference = endBlock - currentBlock;
 
     return {
-      currentBlock: currentBlock,
-      endBlock: endBlock,
-      remainBlock: difference < 0 ? 0 : difference
+      currentBlock: currentBlock ? currentBlock : 0,
+      endBlock: endBlock ? endBlock : 0,
+      remainBlock: difference ? ( difference < 0 ? 0 : difference ) : 0
     };
   }
 
