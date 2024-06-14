@@ -58,7 +58,7 @@ export default function PageBoard({isEndGame ,gameId}: {isEndGame:boolean, gameI
   }, [grid]);
 
   return (
-    <div className='relative bg-base-100 h-[600px] flex flex-col gap-4 justify-center items-center'>
+    <div className='relative bg-base-100 h-[500px] flex flex-col gap-4 justify-center items-center'>
       {gridColors && (
         <Board
           ref={canvasRef}

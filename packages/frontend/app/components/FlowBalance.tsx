@@ -1,6 +1,6 @@
 'use client'
 import { Framework } from "@superfluid-finance/sdk-core";
-import { memo, useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useAccount, useWalletClient } from "wagmi";
 import { providers } from 'ethers';
 import { WalletClient, formatEther } from "viem";
@@ -40,7 +40,7 @@ export default function Main({sender, receiver}:{sender: `0x${string}`,receiver:
       }
     }
 
-    if(typeof(walletClient) !== undefined) getFlow()
+    if(walletClient) getFlow()
   }, [sender, receiver, walletClient])
 
   return(
@@ -153,7 +153,7 @@ const FlowingBalance: React.FC<{
   startingBalance: bigint;
   startingBalanceDate: Date;
   flowRate: bigint;
-}> = memo(({ startingBalance, startingBalanceDate, flowRate }) => {
+}> = (({ startingBalance, startingBalanceDate, flowRate }) => {
   const flowingBalance = useFlowingBalance(
     startingBalance,
     startingBalanceDate,
